@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>   {% block pageTitle %} Bootstrap Home | PIP  {% endblock %}</title>
+
+  {% load django_bootstrap5 %}
+  {% bootstrap_css %}
+
+  
+</head>
+
+<body>
+  
+  {% include 'header.html' %}
+
+  {% block content %}{% endblock %}
+
+</body>
+
+</html>
