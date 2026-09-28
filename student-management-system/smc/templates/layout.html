@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Student Management System {% endblock %}</title>
+
+    {% load django_bootstrap5 %}
+    {% bootstrap_css %}
+
+</head>
+<body>
+    
+    {% include 'header.html' %}
+
+    <main class="pt-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% bootstrap_javascript %}
+
+</body>
+</html>
