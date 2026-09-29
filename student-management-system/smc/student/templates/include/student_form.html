@@ -1,0 +1,35 @@
+
+{% if action == 'edit' and student.name %}
+    {% url 'update_student' student.id as submit_url %}
+{% else %}
+    {% url 'create_student' as submit_url %}
+{% endif %}
+
+<div class="modal-header">
+    <h1 class="modal-title fs-5" id="studentManagementModal">{% if action == 'add' %}Add{% else %}Update{% endif %} Student</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+
+    <form action="{{ submit_url }}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ student.name }}">
+        </div>
+        <div class="mb-3">
+            <label for="roll" class="form-label">Roll</label>
+            <input type="number" class="form-control" id="roll" name="roll" value="{{ student.roll }}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ student.email }}">
+        </div>
+
+        <div class="d-flex column-gap-2 justify-content-end">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+    </form>
+</div>

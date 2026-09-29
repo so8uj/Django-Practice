@@ -8,11 +8,23 @@
 
     <div class="d-flex justify-content-between align-items-center pt-5 mb-3">
         <h3>Welcome to the Student Management System</h3>
-        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#studentManagementModal">Add Student</button>
+        <button class="btn btn-primary btn-sm addStudentBtn">Add
+            Student</button>
     </div>
+
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} {% if message.tags == 'error' %}alert-danger{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="card">
         <div class="card-body">
-
+            {% if students %}
             <table class="table">
                 <thead>
                     <tr>
@@ -24,29 +36,62 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.roll }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>
+                            <button class="btn btn-sm btn-primary editStudentBtn" data-id="{{ student.id }}">Edit</button>
+                            <button class="btn btn-sm btn-danger deleteStudentBtn" data-id="{{ student.id }}">Delete</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <p class="text-center text-primary">No Student Records Found!</p>
+            {% endif %}
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="studentManagementModal" tabindex="-1" aria-labelledby="studentManagementModal" aria-hidden="true">
+<div class="modal fade" id="studentManagementModal" tabindex="-1" aria-labelledby="studentManagementModal"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="studentManagementModal">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
+        <div class="modal-content modalFullBody"></div>
     </div>
 </div>
 
+
+{% endblock %}
+
+{% block pageJs %}
+    <script>
+        $(document).ready(function(){
+            $('.addStudentBtn').click(function(){
+                loadModal("{% url 'load_student_form' 'add' 0 %}");
+            })
+            $('.editStudentBtn').click(function(){
+                let studentId = $(this).data('id');
+                let url = "{% url 'load_student_form' 'edit' 0 %}"
+                url = url.replace(0,studentId);
+                loadModal(url);
+            });
+            $('.deleteStudentBtn').click(function(){
+                let studentId = $(this).data('id');
+                let url = "{% url 'load_student_form' 'delete' 0 %}"
+                url = url.replace(0,studentId);
+                loadModal(url);
+            });
+
+            function loadModal(modalUrl){
+                $('.modalFullBody').load(modalUrl,function(){
+                    $('#studentManagementModal').modal('show');
+                })
+            }
+
+        });
+    </script>
 {% endblock %}
