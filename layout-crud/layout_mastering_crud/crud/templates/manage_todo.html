@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block title %}Create Todo{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="lg:col-7 sm:col-12 mx-auto">
+
+            <div class="d-flex align-items-center justify-content-between">
+
+                {% if type == 'add' %}
+                <h3>Create Todo</h3>
+                <a href="{% url 'todo_index' %}" class="theme-primary btn-subtle rounded-pill">Manage Todos</a>
+                {% else %}
+                    <h3>Update Todo</h3>
+                    <div>
+                        <a href="{% url 'todo_index' %}" class="theme-primary btn-subtle rounded-pill">back</a>
+                        <a href="{% url 'create_todo' 'add' %}" class="theme-primary btn-subtle rounded-pill">Create Todo</a>
+                    </div>
+                {% endif %}
+            </div>
+        
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form method="post" action="{% url 'submit_todo' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="{{ type }}">
+                        {% if type == 'edit' %}
+                            <input type="hidden" name="todo_id" value="{{ id }}">
+                        {% endif %}
+                        <div class="mb-3">
+                            <label for="formGroupExampleInput" class="form-label">Title</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput"
+                                placeholder="Example input placeholder" name="title" value="{{ name }}">
+                        </div>
+                        <div class="form-field">
+                            <label for="fieldTextarea" class="form-label">Detail</label>
+                            <textarea class="form-control" id="fieldTextarea" rows="3" name="description">{{ description }}</textarea>
+                            <div class="form-text">
+                                Be sure to include relevant details.
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <input type="radio" id="fieldRadio1" class="radio" name="status" value="0" {% if status == 0 %}checked{% endif %} />
+                            <label for="fieldRadio1">Pending</label>
+                        </div>
+                        <div class="form-field mb-3">
+                            <input type="radio" id="fieldRadio2" class="radio" name="status" value="1" {% if status == 1 %}checked{% endif %} />
+                            <label for="fieldRadio2">Completed</label>
+                        </div>
+                        <button class="btn-solid theme-primary align-self-start" type="submit">{% if type == 'add' %}Create{% else %}Update{% endif %} Todo</button>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

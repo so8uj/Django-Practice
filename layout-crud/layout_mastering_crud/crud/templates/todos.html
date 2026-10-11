@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}Todos{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-between">
+        <h3>Todos</h3>
+        <a href="{% url 'create_todo' 'add' %}" class="theme-primary btn-subtle rounded-pill">Add Todo</a>
+    </div>
+
+    {% if todos %}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.description }}</td>
+                <td>
+                    {% if todo.status %}
+                        <a href="{% url 'toggle_status' todo.id %}" class="badge bg-success">Completed</a>
+                    {% else %}
+                        <a href="{% url 'toggle_status' todo.id %}" class="badge bg-warning fg-black">Pending</a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'update_todo' 'edit' todo.id %}" class="theme-info btn-subtle rounded-pill btn-sm">Edit</a>
+                    <a href="{% url 'delete_todo' todo.id %}" class="theme-danger btn-subtle rounded-pill btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% else %}
+    <div class="text-center mt-5">
+        <h5 class="fg-danger">No Todos Found</h5>  
+    </div>
+    {% endif %}
+
+</div>
+
+{% endblock %}
