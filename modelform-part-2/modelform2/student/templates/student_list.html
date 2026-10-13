@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Student Lists</title>
+</head>
+<body>
+    <h1>All Student Lists</h1>
+    <a href="{% url 'student_add' %}">Add New Student</a>
+    <ul>
+       {% if students %}
+            {% for student in students %}
+                <li><a href="{% url 'student_detail' student.pk %}">{{ student.name }} - {{ student.email }} - {{ student.age }} </a> | <a href="{% url 'student_edit' student.pk %}">Edit</a> | <a href="{% url 'student_delete' student.pk %}">Delete</a></li>
+            {% endfor %}
+       {% else %}
+            <li>No students found.</li>
+       {% endif %}
+    </ul>
+</body>
+</html>

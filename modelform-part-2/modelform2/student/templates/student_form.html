@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student {% if form_type == 'add' %}Add{% else %}Edit{% endif %} with Model Form</title>
+</head>
+<body>
+    
+    <h1>Student {% if form_type == 'add' %}Add{% else %}Edit{% endif %} with Model Form</h1>
+<a href="{% url 'student_list' %}">View All Students</a>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if form_type == 'add' %}Add{% else %}Edit{% endif %} Student</button>
+    </form>
+
+
+</body>
+</html>
