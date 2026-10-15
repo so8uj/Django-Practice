@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Total Students</h4>
+          <h1>{{ total_students }}</h1>
+          <a href="{% url 'student:index' %}">Manage Students</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Total Teachers</h4>
+          <h1>0</h1>
+          <a href="#">Manage Teachers</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

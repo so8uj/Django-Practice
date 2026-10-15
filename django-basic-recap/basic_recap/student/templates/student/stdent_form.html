@@ -1,0 +1,30 @@
+<div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" value="{{ student.name }}">
+</div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="text" class="form-control" id="email" name="email" value="{{ student.email }}" >
+</div>
+<div class="row mb-3">
+    <div class="col">
+        <label for="roll" class="form-label">Roll</label>
+        <input type="text" class="form-control" id="roll" name="roll" value="{{ student.roll }}">
+    </div>
+    <div class="col">
+        <label for="age" class="form-label">Age</label>
+        <input type="text" class="form-control" id="age" name="age" value="{{ student.age }}">
+    </div>
+</div>
+
+<div class="mb-3">
+    <label for="" class="form-label">Staues</label>
+    <div class="form-field"> 
+        <input class="radio" name="status" type="radio" id="active" value="1" checked />
+        <label for="active">Active</label>
+    </div>
+    <div class="form-field">
+        <input class="radio" name="status" type="radio" id="inactive" value="0" />
+        <label for="inactive">Inctive</label>
+    </div>
+</div>
