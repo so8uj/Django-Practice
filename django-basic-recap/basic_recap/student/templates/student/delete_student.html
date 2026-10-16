@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete Student{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-between pb-5">
+        <h1>Delete Student</h1>
+        <div>
+            <a href="{% url 'student:edit_student' student.pk %}">Edit Detail</a> |
+            <a href="{% url 'student:index' %}">Manage Students</a>
+        </div>
+    </div>
+
+    <form method="POST">
+        <p>Are you want to sure delete <b>{{ student.name | upper }}</b> datails!</p>
+        {% csrf_token %}
+        <a href="{% url 'student:index' %}">Cencel</a> 
+        <button class="btn-subtle theme-danger ms-3" type="submit">Yes! Delete </button>
+    </form>
+    
+
+</div>
+{% endblock %}s

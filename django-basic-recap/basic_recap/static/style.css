@@ -1,6 +1,3 @@
-.alert-success{
-    background: var(--bs-primary-bg);
-}
-.alert-error{
+.theme-error{
     background: var(--bs-danger-bg);
 }

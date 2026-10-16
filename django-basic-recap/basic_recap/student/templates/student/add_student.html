@@ -9,19 +9,13 @@
         <a href="{% url 'student:index' %}">Manage Students</a>
     </div>
 
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags  }}">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+    {% include 'messages.html' %}
 
     <form method="POST">
         {% csrf_token %}
         {% include 'student/stdent_form.html' %}
 
-        <button class="btn theme-primary" type="submit">Add Student</button>
+        <button class="btn-subtle theme-primary" type="submit">Add Student</button>
 
     </form>
     

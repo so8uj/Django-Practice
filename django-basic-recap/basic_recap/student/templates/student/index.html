@@ -9,6 +9,8 @@
         <a href="{% url 'student:add_student' %}">Add Student</a>
     </div>
 
+    {% include 'messages.html' %}
+
     {% if students %}
 
         <table class="table">
@@ -31,10 +33,17 @@
                         <td>{{ student.roll }}</td>
                         <td>{{ student.email }}</td>
                         <td>{{ student.age }}</td>
-                        <td> {% if student.status %}Active{% else %}Inactive{% endif %}</td>
+                        <td> <a href="{% url 'student:toggle_status' student.pk %}">
+                            {% if student.status %}
+                                <span class="badge theme-success">Active</span>
+                            {% else %}
+                                <span class="badge theme-warning">Inactive</span>
+                            {% endif %}
+                            </a>
+                        </td>
                         <td>
-                            <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                            <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                            <a href="{% url 'student:edit_student' student.pk %}" class="btn-subtle btn-sm theme-primary">Edit</a>
+                            <a href="{% url 'student:delete_student' student.pk %}" class="btn-subtle btn-sm theme-danger">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -20,11 +20,11 @@
 <div class="mb-3">
     <label for="" class="form-label">Staues</label>
     <div class="form-field"> 
-        <input class="radio" name="status" type="radio" id="active" value="1" checked />
+        <input class="radio" name="status" type="radio" id="active" value="1" {% if student.status %}checked{% endif %} />
         <label for="active">Active</label>
     </div>
     <div class="form-field">
-        <input class="radio" name="status" type="radio" id="inactive" value="0" />
+        <input class="radio" name="status" type="radio" id="inactive" value="0" {% if not student.status %}checked{% endif %} />
         <label for="inactive">Inctive</label>
     </div>
 </div>
