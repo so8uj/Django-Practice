@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Create Teacher{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-between pb-5">
+        <h1>Create Teacher</h1>
+        <a href="{% url 'teacher:index' %}">Manage Teachers</a>
+    </div>
+
+    {% include 'messages.html' %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ teacherform.as_p }}
+
+        <button class="btn-subtle theme-primary" type="submit">Create Teacher</button>
+
+    </form>
+    
+
+</div>
+{% endblock %}

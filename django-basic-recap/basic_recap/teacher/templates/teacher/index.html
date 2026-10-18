@@ -1,1 +1,47 @@
-<h1>Teacher</h1>
+{% extends 'layout.html' %}
+{% block title %} Teacher Management {% endblock %}
+{% block content %} 
+
+<div class="container mt-5">
+    <div class="d-flex align-items-center justify-content-between pb-5">
+        <h1>Manage Teachers</h1>
+        <a href="{% url 'teacher:create_teacher' %}">Create Teacher</a>
+    </div>
+
+    {% include 'messages.html' %}
+
+    {% if teachers %}
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Designation</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ teacher.name }}</td>
+                    <td>{{ teacher.department }}</td>
+                    <td>{{ teacher.designation }}</td>
+                    <td>
+                        <a href="{% url 'teacher:update_teacher' teacher.pk %}" class="btn-subtle btn-sm theme-primary">Edit</a>
+                        <a href="" class="btn-subtle btn-sm theme-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p class="text-center">No teachers found.</p>
+    {% endif %}
+
+</div>
+
+{% endblock %}
